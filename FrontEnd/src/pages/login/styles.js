@@ -6,14 +6,26 @@ export const Login = styled.div`
     align-items: center;
     justify-content: center;
     min-height:100vh;
-    padding: 0 2rem
+    padding: 0 2rem;
+    background-color:#F1F1F1
+`;
+
+export const Title = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    font-size: 50px;
+    font-weight: bold;
+    color: #A9A9A9;
 `;
 
 export const Form = styled.form`
-    background-color:#f1f1f1;
+    background-color:#F8F8FF;
     width: 100%;
     max-width: 480px;
-    padding: 0.5rem
+    padding: 50px
 `
 
 export const Label = styled.label`

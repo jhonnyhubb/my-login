@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Login, Form, Label, InputEmail, InputPassword, Actions, Button } from "./styles";
+import { Login, Title, Form, Label, InputEmail, InputPassword, Actions, Button } from "./styles";
 import { AuthContext } from "../../contexts/auth"
 
 const LoginPage = () => {
@@ -16,8 +16,8 @@ const LoginPage = () => {
 
     return (
         <Login>
-            <h1 className="title">Login</h1>
             <Form onSubmit={handleSubmit}>
+                <Title>Login</Title>
                 <div className="field">                
                     <Label>Email</Label>
                     <InputEmail type="email" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)}/>               
