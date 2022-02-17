@@ -16,7 +16,7 @@ routes.post('/sessions', SessionsController.create);
 routes.get('/hello', HelloController.index);
 
 // middlewares
-routes.use(auth);
+//routes.use(auth);
 
 // private
 routes.get('/users', UsersController.index);

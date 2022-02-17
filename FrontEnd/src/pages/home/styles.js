@@ -79,3 +79,13 @@ export const Trainer = styled.div`
 export const Client = styled.div`
    font-size:1.5rem; 
 `;
+
+export const New = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: #f1f1f1;
+    max-width: 480px;
+    margin: 2rem auto;
+    padding: 0.5rem;
+`;

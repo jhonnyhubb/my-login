@@ -1,12 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../contexts/auth";
-import { Home, Nav, Logo, Search, Label, Input, Button, Repositories, Title, List, Item, Info, Trainer, Client } from "./styles";
+import { Home } from "./styles";
+//components
+import NavBar from "./Components/NavBar";
+import SearchDiv from "./Components/SearchDiv";
+import RepositoriesDiv from "./Components/RepositoriesDiv";
+//connect with backend
+import { getRepositories } from "../../services/api"
 
+const userId = '6206b2b6e617cf7d5166802a'
 
 const HomePage = () => {
     const {  logout } = useContext(AuthContext);
 
-    const handdleLogout = () => {
+    const handleLogout = () => {
         logout();
     }
     
@@ -14,36 +21,40 @@ const HomePage = () => {
         console.log("query", query);
     }
 
-    const handleClear = (query) => {
+    const handleTrainRepo = (query) => {
         console.log("query");
     }
 
+    const handleDeleteRepo = (repository) => {
+        console.log("delete", repository);
+    }
+
+    const handleNewRepo = (url) => {
+        console.log("new", url);
+    }
+
+    //connect with backend
+    const [repositories, setRepositories] = useState([]);
+
+    const loadData = async (query = '') => {
+        const response = await getRepositories(userId);
+
+        setRepositories(response.data)
+    }
+
+    useEffect(() => {
+        (async () => loadData())();
+    }, []);
+
     return (
     <Home>
-        <Nav>
-            <Logo>jhonny's Academy</Logo>
-        <Button onClick={handdleLogout}>Logout</Button>
-        </Nav>
-
-        <Search>
-            <Label htmlFor="query">Search</Label>
-            <Input type="search" name="query" id="query" />
-            <Button onClick={handleSearch}>Search</Button>
-            <Button onClick={handleClear}>Clear</Button>
-        </Search>
-
-        <Repositories>
-            <Title>Training</Title>
-            <List>
-                <Item>
-                    <Info>
-                        <Trainer>Jorge</Trainer>
-                        <Client>Maria</Client>
-                    </Info>
-                    <Button>Delete</Button>
-                </Item>
-            </List>
-        </Repositories>
+        <NavBar onLogout={handleLogout}/>
+        <SearchDiv onSearch={handleSearch}/>
+        <RepositoriesDiv 
+            repositories={[]} 
+            onTrain={handleTrainRepo} 
+            onDelete={handleDeleteRepo}
+            onNewRepo={handleNewRepo}/>
         
     </Home>
     )
