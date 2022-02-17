@@ -8,14 +8,17 @@ const RepositoriesDiv = ({ repositories, onDeleteRepo, onNewRepo }) => {
         <Repositories>
             <Title>Training</Title>
             <List>
-                <Item>
-                    <Info>
-                        <Trainer>Jhonny</Trainer>
-                        <Client>Maria</Client>
-                    </Info>
-                    <Button onClick={repositories}>info</Button>
-                    <Button onClick={() => onDeleteRepo(null)}>Delete</Button>
-                </Item>
+                {
+                   repositories.map((repository) => (
+                        <Item key={repository._id}>
+                            <Info>
+                                <Trainer>{repository.name.substring(0, repository.name.indexOf('/'))}</Trainer>
+                                <Client>{repository.name.substring(repository.name.indexOf('/') + 1)}</Client>
+                            </Info>
+                            <Button onClick={() => onDeleteRepo(repository)}>Delete</Button>
+                        </Item>
+                   )) 
+                }
             </List>
 
             <New>

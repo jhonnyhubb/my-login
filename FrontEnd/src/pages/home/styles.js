@@ -1,4 +1,13 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
+
+export const Loading = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height:100vh;
+    padding: 0 2rem;
+    background-color:#F1F1F1
+`;
 
 export const Home = styled.div`
     background-color: #fff;

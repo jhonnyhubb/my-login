@@ -3,14 +3,13 @@ import { Login, Title, Form, Label, InputEmail, InputPassword, Actions, Button }
 import { AuthContext } from "../../contexts/auth"
 
 const LoginPage = () => {
-    const { authenticated, login } = useContext(AuthContext)
+    const { login } = useContext(AuthContext)
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log("submit", {email: email, password: password})   
+        e.preventDefault();  
         login(email, password); //integrate with my context and API
     }
 
