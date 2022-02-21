@@ -1,7 +1,8 @@
 import React, { useState, useEffect, createContext } from "react";
 import { useNavigate } from 'react-router-dom';
+import { createSession } from '../services/api';
 
-export const AuthContext = createContext()
+export const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
     
@@ -21,17 +22,19 @@ export const AuthProvider = ({children}) => {
     }, []);
 
     const login = async (email, password) => {
-        console.log("login auth", {email, password});
+        const response = await createSession(email, password);
+
+        setUser(response.data.user)
 
         //api create a session
 
         const loggedUser = {
-            id: "1", 
+            id: "62068a9513ccb7cc194372cb", 
             email,
         }
         
         // keep logged in
-        localStorage.setItem('user', JSON.stringify(loggedUser));
+        localStorage.setItem('user', JSON.stringify(response.data.user));
         
         if (password === "123456") {
             setUser(loggedUser);
@@ -48,7 +51,13 @@ export const AuthProvider = ({children}) => {
     };
 
     return(
-        <AuthContext.Provider value ={{authenticated: !!user, user, loading, login, logout}}>
+        <AuthContext.Provider 
+        value ={{
+            authenticated: !!user, 
+            user, 
+            loading, 
+            login, 
+            logout}}>
             {children}
         </AuthContext.Provider>
     )

@@ -4,6 +4,10 @@ export const api = axios.create({
     baseURL: 'http://localhost:5000'
 })
 
+export const createSession = async (email, password) => {
+    return api.post('/sessions', { email, password })
+}
+
 const getRepositoryName = (url) => {
     // https://ihateregex.io/expr/url/
     const regex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\\+.~#?&\\/\\/=]*)/;

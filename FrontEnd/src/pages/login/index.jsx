@@ -1,9 +1,11 @@
 import React, { useState, useContext } from "react";
 import { Login, Title, Form, Label, InputEmail, InputPassword, Actions, Button } from "./styles";
-import { AuthContext } from "../../contexts/auth"
+import { AuthContext } from "../../contexts/auth";
+// authentication
+import { createSession } from '../../services/api';
 
 const LoginPage = () => {
-    const { login } = useContext(AuthContext)
+    const { authenticated, user, login } = useContext(AuthContext);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");

@@ -10,7 +10,7 @@ import { Link } from "react-router-dom"
 //connect with backend
 import { getRepositories, createRepository, deleteRepository } from "../../services/api"
 
-const userId = '62068a9513ccb7cc194372cb'
+//const user?.id = '62068a9513ccb7cc194372cb'
 
 const HomePage = () => {
     const {  logout } = useContext(AuthContext);
@@ -24,13 +24,13 @@ const HomePage = () => {
     }
 
     const handleDeleteRepo = async (repository) => {
-        await deleteRepository(userId, repository._id);
+        await deleteRepository(user?.id, repository._id);
         await loadData();
     }
 
     const handleNewRepo = async (url) => {
         try{
-            await createRepository(userId, url);
+            await createRepository(user?.id, url);
             await loadData();
         } catch (error){
             console.error(error);
@@ -39,13 +39,14 @@ const HomePage = () => {
     }
 
     //connect with backend
+    const { user } = useContext(AuthContext);
     const [repositories, setRepositories] = useState([]);
     const [ loading, setLoading ] = useState(true);
     const [ loadingError, setLoadingError ] = useState(false);
 
     const loadData = async (query = '') => {
         try {
-            const response = await getRepositories(userId, query);
+            const response = await getRepositories(user?.id, query);
             setRepositories(response.data)
             setLoading(false);
         } catch (error) {
