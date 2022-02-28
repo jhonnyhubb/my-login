@@ -57,7 +57,7 @@ const HomePage = () => {
 
     useEffect(() => {
         (async () => await loadData())();
-    }, []);
+    }, );
 
     if (loading){
         return(
